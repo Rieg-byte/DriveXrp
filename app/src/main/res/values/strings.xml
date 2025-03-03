@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">DriveXrp</string>
+    <string name="auth_content">Поможем найти твою следующую поездку</string>
+    <string name="no_connection">Нет подключения к интернету</string>
+    <string name="refresh">Повторить попытку</string>
+    <string name="check_connection_and_refresh">Проверьте подключение и повторите попытку</string>
+    <string name="login_header">Войдите в аккаунт</string>
+    <string name="login_prompt">Пожалуйста, введите свои данные</string>
+    <string name="email">Электронная почта</string>
+    <string name="email_prompt">Введите электронную почту</string>
+    <string name="password">Пароль</string>
+    <string name="password_prompt">Введите пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="terms">Я согласен с условиями обслуживания и политикой конфиденциальности</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="login_button">Войти</string>
+    <string name="login_with_google">Войти через Google</string>
+    <string name="sign_up_button">Зарегистрироваться</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="next">Далее</string>
+    <string name="first_name">Имя</string>
+    <string name="enter_first_name">Введите имя</string>
+    <string name="second_name">Фамилия</string>
+    <string name="enter_second_name">Введите фамилию</string>
+    <string name="middle_name">Отчество</string>
+    <string name="enter_middle_name">Введите отчество</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="gender">Пол</string>
+    <string name="male">Мужский</string>
+    <string name="female">Женский</string>
+</resources>

@@ -1,8 +1,7 @@
-package com.rieg.drivexrp.ui.components
+package com.rieg.drivexrp.ui.components.fields
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -24,13 +23,13 @@ import com.rieg.drivexrp.R
 
 @Composable
 fun PasswordTextField(
-    modifier: Modifier = Modifier,
     label: String,
     placeholder: String,
     password: String,
     onPasswordChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     isError: Boolean = false,
-    supportingText: String? = null
+    supportingText: @Composable() (() -> Unit)? = null
 ) {
     var isVisibility by rememberSaveable { mutableStateOf(false) }
     OutlinedTextField(
@@ -51,14 +50,7 @@ fun PasswordTextField(
         onValueChange = onPasswordChange,
         isError = isError,
         singleLine = true,
-        supportingText = {
-            if (isError && supportingText != null) {
-                Text(
-                    text = supportingText,
-                    fontSize = 12.sp
-                )
-            }
-        },
+        supportingText = supportingText,
         visualTransformation = if (isVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         trailingIcon = {

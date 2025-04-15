@@ -1,21 +1,26 @@
 package com.rieg.drivexrp.navigation
 
-import androidx.navigation.NavGraphBuilder
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import com.rieg.drivexrp.presentation.main.MainScreen
+import com.rieg.drivexrp.presentation.home.HomeScreen
 import kotlinx.serialization.Serializable
+
 
 @Serializable
 object MainGraph
 
-@Serializable
-object MainRoute
-
-fun NavGraphBuilder.mainGraph() {
-    navigation<MainGraph>(startDestination = MainRoute) {
-        composable<MainRoute> {
-            MainScreen()
+@Composable
+fun MainNavGraph(navRootController: NavHostController, navController: NavHostController) {
+    NavHost(navController = navController, startDestination = HomeRoute) {
+        composable<HomeRoute> {
+            HomeScreen()
         }
+        composable<FavoriteRoute> {
+
+        }
+        settingsGraph(navRootController = navRootController, navController = navController)
     }
 }
+

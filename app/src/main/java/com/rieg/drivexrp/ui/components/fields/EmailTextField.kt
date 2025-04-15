@@ -1,4 +1,4 @@
-package com.rieg.drivexrp.ui.components
+package com.rieg.drivexrp.ui.components.fields
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.OutlinedTextField
@@ -7,17 +7,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import kotlin.math.sin
 
 @Composable
 fun EmailTextField(
-    modifier: Modifier = Modifier,
     label: String,
     placeholder: String,
     email: String,
     onEmailChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     isError: Boolean = false,
-    supportingText: String? = null
+    supportingText:  @Composable() (() -> Unit)? = null
 ) {
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
@@ -37,14 +36,7 @@ fun EmailTextField(
         value = email,
         onValueChange = onEmailChange,
         isError = isError,
-        supportingText = {
-            if (isError && supportingText != null) {
-                Text(
-                    text = supportingText,
-                    fontSize = 12.sp
-                )
-            }
-        }
+        supportingText = supportingText
     )
 }
 

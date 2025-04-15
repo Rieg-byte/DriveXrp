@@ -1,4 +1,4 @@
-package com.rieg.drivexrp.presentation.login
+package com.rieg.drivexrp.presentation.signin
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -26,11 +26,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rieg.drivexrp.R
-import com.rieg.drivexrp.ui.components.EmailTextField
 import com.rieg.drivexrp.ui.components.HeaderText
-import com.rieg.drivexrp.ui.components.PasswordTextField
 import com.rieg.drivexrp.ui.components.XrpButton
 import com.rieg.drivexrp.ui.components.XrpOutlinedButton
+import com.rieg.drivexrp.ui.components.fields.EmailTextField
+import com.rieg.drivexrp.ui.components.fields.PasswordTextField
 import com.rieg.drivexrp.ui.theme.DriveXrpTheme
 
 
@@ -41,6 +41,8 @@ fun SignInScreen(
     onNavigateMain: () -> Unit
 ) {
     val signInUiState by signInViewModel.signInUiState.collectAsState()
+    val passwordError = signInUiState.passwordError
+    val emailError = signInUiState.emailError
     LaunchedEffect(signInUiState.isSignIn) {
         if (signInUiState.isSignIn) {
             onNavigateMain()
@@ -53,28 +55,42 @@ fun SignInScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        HeaderText(text = stringResource(id = R.string.login_header))
+        HeaderText(text = stringResource(R.string.login_header))
         Text(
-            text = stringResource(id = R.string.login_prompt),
+            text = stringResource(R.string.login_prompt),
             textAlign = TextAlign.Center,
             fontSize = 14.sp
         )
         Spacer(modifier = Modifier.height(40.dp))
         EmailTextField(
-            label = stringResource(id = R.string.email),
-            placeholder = stringResource(id = R.string.email_prompt),
+            label = stringResource(R.string.email),
+            placeholder = stringResource(R.string.email_prompt),
             email = signInUiState.email,
             onEmailChange = signInViewModel::onUpdateEmail,
-            isError = false,
-            supportingText = ""
+            isError = emailError != null,
+            supportingText = {
+                if (emailError != null) {
+                    Text(
+                        text = stringResource(emailError),
+                        fontSize = 12.sp
+                    )
+                }
+            }
         )
         PasswordTextField(
-            label = stringResource(id = R.string.password),
-            placeholder = stringResource(id = R.string.password_prompt),
+            label = stringResource(R.string.password),
+            placeholder = stringResource(R.string.password_prompt),
             password = signInUiState.password,
             onPasswordChange = signInViewModel::onUpdatePassword,
-            isError = false,
-            supportingText = ""
+            isError = passwordError != null,
+            supportingText = {
+                if (passwordError != null) {
+                    Text(
+                        text = stringResource(passwordError),
+                        fontSize = 12.sp
+                    )
+                }
+            }
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
@@ -87,7 +103,7 @@ fun SignInScreen(
         Spacer(modifier = Modifier.height(20.dp))
         XrpButton(
             modifier = Modifier.fillMaxWidth(),
-            onClick = signInViewModel::onSignIn
+            onClick = { signInViewModel.submitData(signInUiState.email, signInUiState.password) }
         ) {
             Text(
                 text = stringResource(id = R.string.login_button)
